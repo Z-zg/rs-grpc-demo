@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package student;
+
+// Student message definition
+message Student {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  string major = 5;
+  double gpa = 6;
+}
+
+// Request messages
+message CreateStudentRequest {
+  Student student = 1;
+}
+
+message GetStudentRequest {
+  string id = 1;
+}
+
+message UpdateStudentRequest {
+  Student student = 1;
+}
+
+message DeleteStudentRequest {
+  string id = 1;
+}
+
+message ListStudentsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+// Response messages
+message CreateStudentResponse {
+  Student student = 1;
+}
+
+message GetStudentResponse {
+  Student student = 1;
+}
+
+message UpdateStudentResponse {
+  Student student = 1;
+}
+
+message DeleteStudentResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ListStudentsResponse {
+  repeated Student students = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+// Student management service
+service StudentService {
+  // Create a new student
+  rpc CreateStudent(CreateStudentRequest) returns (CreateStudentResponse);
+  
+  // Get a student by ID
+  rpc GetStudent(GetStudentRequest) returns (GetStudentResponse);
+  
+  // Update an existing student
+  rpc UpdateStudent(UpdateStudentRequest) returns (UpdateStudentResponse);
+  
+  // Delete a student by ID
+  rpc DeleteStudent(DeleteStudentRequest) returns (DeleteStudentResponse);
+  
+  // List all students with pagination
+  rpc ListStudents(ListStudentsRequest) returns (ListStudentsResponse);
+}

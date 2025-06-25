@@ -1,0 +1,13 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+proto = { path = "../proto" }
+tokio = { workspace = true }
+tonic = { workspace = true }
+prost = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros"] }
